@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript" src="https://www.imooc.com/static/lib/jquery/1.9.1/jquery.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>飞龙神探社曲库</title>
+<link href="static/css/index_style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<iframe name="header" width=100% height=100% marginwidth=0 marginheight=0 frameborder="no" border="0"  src="common/head.html" ></iframe> 
+  	<div id="content">
+  		<img id="img"  height=150 width=150>
+		<audio id="msc" controls="controls" autoplay="autoplay" width="280" height="50"></audio>
+			
+  		<!-- 
+  		<bgsound id="msc"  loop="-1">
+  		<video id="mscvideo" width="280" height="50" controls="controls">
+  		<source id="msc" type="video/mp3" autoplay="true">
+  		</video>
+  		<embed id="msc"  autostart="true" loop="false" width="280" height="50" />
+  		 -->
+  	</div>
+  	<span>----------------------</span>
+  	<span>--------歌曲信息-------</span>
+  	<span>----------------------</span>
+  	<div id="lyrics"></div>
+  	<span>----------------------</span>
+  	<span>--------创作灵感-------</span>
+  	<span>----------------------</span>
+  	<div id="backgroundstory"></div>
+</body>
+</html>
+  	<script type="text/javascript" >
+		var query = window.location.search;
+		var host = window.location.host;
+		
+		var str = query.substring(1,3);
+
+		var imgsrc="static/img/s"+str+".jpg";
+		var mscsrc="static/msc/s"+str+".mp3";
+		var lycurl="static/txt/lyc/s"+str+".txt";
+		var bgsurl="static/txt/bgs/s"+str+".txt";
+		document.getElementById("img").src=imgsrc;
+		document.getElementById("msc").src=mscsrc;
+		$(function(){
+		    $.ajax({
+		        url: lycurl,
+		        dataType: 'text',
+		        success: function(data) {
+		        	document.getElementById("lyrics").innerHTML=data;
+		        	document.getElementById("backgroundstory").innerHTML="<blockquote>background story</blockquote>";
+		        }
+		    });
+		});
+		
+		$(function(){
+		    $.ajax({
+		        url: bgsurl,
+		        dataType: 'text',
+		        success: function(data) {
+		        	document.getElementById("backgroundstory").innerHTML=data;
+		        }
+		    });
+		});
+		
+  	</script>
