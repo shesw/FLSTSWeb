@@ -1,0 +1,40 @@
+*{
+	padding:0px;
+	margin:0px;
+}
+
+body{
+	background:#ffc;
+	margin:10px;
+}
+
+#content{
+	margin-bottom:10px
+}
+
+#lyrics{
+	margin-left:10px;
+	font-size:14px;
+	line-height:1.4em;
+	font-family:"¿¬Ìå";
+	color:#006	
+}
+
+span{
+	color:#06c;
+	font-weight:bold;
+	font-family:"Microsoft YaHei"
+}
+
+#backgroundstory{
+	text-indent:2em;
+	margin-left:10px;
+	font-size:14px;
+	line-height:1.4em;
+	font-family:"·ÂËÎ";
+	color:#330
+}
+
+#msc{
+	color:#ccc;
+}
