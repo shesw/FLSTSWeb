@@ -14,15 +14,16 @@ public class SinaCloudSign {
 	public static void main(String args[]) throws UnsupportedEncodingException {
 		String path = "/song_info.txt";
 		SinaCloudSign sign = new SinaCloudSign.Builder().verb("GET")
-				.canonicalizedResource("/bucket_name/path/to/my/file.txt?ip=1.2.3.4")
-				.date(1396569436+"")
-				.expires(1396569436)
+				.canonicalizedResource("/music-store/song_info.txt")
+				.date(1696569436+"")
+				.expires(1696569436)
 				.builder();
 		System.out.println(sign.getUrl(path));
 	}
 	
-	//private String secretAccessKey = "2o3w9tlWumQRMwg2TQqi";
-	String secretAccessKey = "1001hbk3aV";
+	private String accessKey = "2o3w9tlWumQRMwg2TQqi";
+	private String secretAccessKey = "01a03965e29bed4a51f51f57d10f4c60ba68a050";
+	//String secretAccessKey = "1001hbk3aV";
 	private String serverAddress = "http://sinacloud.net/music-store";
 	private final Base64.Decoder decoder = Base64.getDecoder();
 	private final Base64.Encoder encoder = Base64.getEncoder();
@@ -84,12 +85,11 @@ public class SinaCloudSign {
 		}
 	}
 	public String getUrl(String path) throws UnsupportedEncodingException {	
-		return serverAddress+path+""+"?KID=sina,"+secretAccessKey+"&Expires="+expires+"&ssig="+URLEncoder.encode(getSignature(),"utf-8");
+		return serverAddress+path+""+"?KID=sina,"+accessKey+"&Expires="+expires+"&ssig="+URLEncoder.encode(getSignature(),"utf-8");
 	}
 	public String getSignature() throws UnsupportedEncodingException {
 		String signature = "";
 		String ssig = "";
-		date = expires+"";
 		String stringToSign = verb + "\n" +
 			               contentMD5 + "\n" +
 			               contentType + "\n" +
@@ -104,6 +104,7 @@ public class SinaCloudSign {
 			e.printStackTrace();
 		}
 		ssig = signature.substring(4, 14); //截取10位字符, 从第5个开始, 第15个结束
+		System.out.println(hamcsha1(secretAccessKey.getBytes(), stringToSign.getBytes("UTF-8") ));
 		System.out.println(URLEncoder.encode(signature,"utf-8"));
 		return ssig;
 	}
@@ -131,7 +132,8 @@ public class SinaCloudSign {
 	            hs.append('0');
 	        hs.append(stmp);
 	    }
-	    return hs.toString().toUpperCase();
+	    //return hs.toString().toUpperCase();
+	    return hs.toString();
 	}
 	private String base64Encode(String str) {
 		String encodedText = "";
