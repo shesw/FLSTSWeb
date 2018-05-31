@@ -20,5 +20,14 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xom-1.0d10.jar"/>
 	<classpathentry kind="lib" path="G:/eclipse/eclipse/eclipse/configuration"/>
-	<classpathentry kind="output" path="build/classes"/>
+	<classpathentry kind="lib" path="G:/eclipse/eclipse/eclipse/plugins/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="G:/eclipse/eclipse/eclipse/plugins/OpenExplorer_1.5.0.v201108051513.jar"/>
+	<classpathentry kind="lib" path="G:/eclipse/eclipse/eclipse/plugins/org.eclipse.equinox.launcher_1.4.0.v20161219-1356.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpclient-4.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpcore-4.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/scs-java-sdk-distribution-0.0.1-SNAPSHOT-bin.jar"/>
+	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

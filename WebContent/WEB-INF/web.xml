@@ -9,4 +9,12 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>albumInfoServlet</servlet-name>
+    <servlet-class>servlet.albumInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>albumInfoServlet</servlet-name>
+    <url-pattern>/servlet</url-pattern>
+  </servlet-mapping>
 </web-app>
