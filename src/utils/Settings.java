@@ -4,7 +4,7 @@ import java.io.File;
 
 public class Settings {
 
-	public String savePath = "/lab324data";
+	public String savePath = "~/lab324data";
 	//public String savePath = "e:/lab324data";
 	
 	public String accountPath = savePath+"/account.txt";
@@ -24,6 +24,7 @@ public class Settings {
 			File file = new File(string);
 			if(!file.exists()) {
 				file.mkdirs();
+				System.out.println(file.getAbsolutePath());
 			}
 		}
 	}
