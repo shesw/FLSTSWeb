@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import utils.SessionUtil;
 import utils.Settings;
+import utils.SinaStoreSDK;
 
 /**
  * Servlet implementation class download
@@ -53,6 +55,18 @@ public class download extends HttpServlet {
 		byte[] buffer = new byte[8192];
 		int bytesRead = 0;
 				
+		File file = new File(RECORDS_PATH+"/"+fileName);
+		SinaStoreSDK sss = new SinaStoreSDK();
+		
+		if(!file.exists()) {
+			try {
+				sss.getObject("music-store", "lab324data/records/"+fileName, RECORDS_PATH+"/"+fileName);
+			} catch (Exception e) {
+				// TODO: handle exception
+				response.setStatus(500);
+			}
+			
+		}
 		
 		try {
 		    ops = response.getOutputStream();
@@ -75,6 +89,7 @@ public class download extends HttpServlet {
 			    e.printStackTrace();
 			}
 		}
+		
 		
 	}
 

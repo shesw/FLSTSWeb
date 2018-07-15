@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Writer;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import utils.DataHandler;
+import utils.RecordUtil;
 import utils.SessionUtil;
 import utils.Settings;
 
@@ -25,8 +27,7 @@ import utils.Settings;
 @WebServlet("/query")
 public class query extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final String RECORDS_PATH = new Settings().recordsPath;
-    
+    RecordUtil recordUtil = new RecordUtil();
     
     /**
      * @see HttpServlet#HttpServlet()
@@ -59,33 +60,10 @@ public class query extends HttpServlet {
 			return;
 		}
 		
-		StringBuilder recordsSB = new StringBuilder("[");
-		try {
-			File fileName = new File(RECORDS_PATH+"/record"+date+".txt");
-			if(!fileName.exists()) {
-				response.setStatus(417);
-				return;
-			}
-			BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "utf-8"));
-			String string = bReader.readLine();
-			DataHandler dHandler = new DataHandler();
-			while((string = bReader.readLine())!=null) {
-				if("".equals(string)) {
-					continue;
-				}
-				recordsSB.append(dHandler.handle(string));
-			}
-			recordsSB.delete(recordsSB.length()-1,recordsSB.length());
-			recordsSB.append("]");
-			bReader.close();
-			
-		} catch (FileNotFoundException e) {
-			// TODO: handle exception
-			response.setStatus(417);
-			return;
-		} catch (Exception e) {
-			// TODO: handle exception
-			response.setStatus(500);
+		
+		String recordsSB = recordUtil.queryRecords(date);
+		if(Pattern.matches("^[0-9]+", recordsSB)) {
+			response.setStatus(Integer.parseInt(recordsSB));
 			return;
 		}
 		

@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utils.RecordUtil;
 import utils.SessionUtil;
 import utils.Settings;
 
@@ -31,8 +32,7 @@ import utils.Settings;
 @WebServlet("/postRecord")
 public class postRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final String RECORDS_PATH = new Settings().recordsPath;
-    
+    private RecordUtil rUtil = new RecordUtil();
     
     /**
      * @see HttpServlet#HttpServlet()
@@ -67,69 +67,35 @@ public class postRecord extends HttpServlet {
 		String date = request.getParameter("date");
 		String item = request.getParameter("item");
 		String change = request.getParameter("change");
-		if(date==null || item==null || change==null) {
+		String mode = request.getParameter("mode");
+		if( (mode==null || mode.equals("post")) && (date==null || item==null || change==null) ) {
 			response.setStatus(417);
 			return;
 		}
-
-		//获取余额
 		
-		double remain;
-		File remainFile = new File(RECORDS_PATH+"/remain.txt");
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(remainFile), "utf-8"));
-			remain = Double.parseDouble(bufferedReader.readLine());
-			bufferedReader.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			response.setStatus(500);
+		if( mode!=null && mode.equals("reset") && change==null ) {
+			response.setStatus(418);
 			return;
 		}
 		
-		
 
-		String recordName = "/record"+(date.replaceAll("-", "").substring(0,6))+".txt";
-		String recordPath = RECORDS_PATH+recordName;
-		File recordFile = new File(recordPath);
-		BufferedWriter bWriter;
-		boolean first = !recordFile.exists();
-		try {
-			//bWriter = new BufferedWriter(new FileWriter(recordFile,true));
-			bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(recordFile,true),"utf-8"));
-			if (first) {
-				bWriter.append("日期..............项目........金额......余额");
-			}		
-			bWriter.newLine();
-			remain -= Double.parseDouble(change);
-			DecimalFormat dFormat = new DecimalFormat("#.00");
-			String change1 = dFormat.format(Double.parseDouble(change));
-			String remain1 = dFormat.format(remain);
-			
-			
-			bWriter.append(date+"........"+item+"........"+change1+"........"+remain1);
-			bWriter.flush();
-			bWriter.close();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			response.setStatus(500);
-			return;
+		int statusCode = 500;
+		
+		
+		if(! (mode==null)) {
+			switch (mode) {
+			case "reset":
+				statusCode = rUtil.resetRemain(change);
+				break;
+			default:
+				statusCode = rUtil.postRecord(date, item, change);
+				break;
+			}
+		}else {
+			statusCode = rUtil.postRecord(date, item, change);
 		}
 		
-		//设置余额
-		try {
-			//BufferedWriter bWriter2 = new BufferedWriter(new FileWriter(remainFile));
-			BufferedWriter bWriter2 = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(remainFile),"utf-8"));
-			bWriter2.write(remain+"");
-			bWriter2.flush();
-			bWriter2.close();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			response.setStatus(500);
-		}
+		response.setStatus(statusCode);
 		
 	}
 

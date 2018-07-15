@@ -18,7 +18,7 @@ public class HttpUtil {
 			StringBuilder info = new StringBuilder();
 			String str;
 			while( (str=br.readLine()) != null ) {
-				info.append(str);
+				info.append(str+"<br>");
 			}
 			result = info.toString();
 			br.close();
@@ -27,6 +27,7 @@ public class HttpUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		connection.disconnect();
 		return result;
 	}
 

@@ -20,12 +20,16 @@ import com.sina.cloudstorage.services.scs.model.S3Object;
 import com.sina.cloudstorage.services.scs.model.UserIdGrantee;
 import com.sina.cloudstorage.services.scs.transfer.ObjectMetadataProvider;
 
+
 public class SinaStoreSDK {
 	
 	private String accessKey = "2o3w9tlWumQRMwg2TQqi";
 	private String secretKey = "01a03965e29bed4a51f51f57d10f4c60ba68a050";
 	private AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 	private SCS conn = new SCSClient(credentials);
+	
+	
+
 	
 	/* ����url*/
 	public String generateUrl(String bucketName, String path, int minutes){
@@ -104,10 +108,10 @@ public class SinaStoreSDK {
 	 */
 	public ObjectMetadata getObjectMeta(String bucketName, String path){
 	    ObjectMetadata objectMetadata = conn.getObjectMetadata(bucketName, path);
-	    System.out.println(objectMetadata.getUserMetadata());
-	    System.out.println(objectMetadata.getContentLength());
-	    System.out.println(objectMetadata.getRawMetadata());
-	    System.out.println(objectMetadata.getETag());
+//	    System.out.println(objectMetadata.getUserMetadata());
+//	    System.out.println(objectMetadata.getContentLength());
+//	    System.out.println(objectMetadata.getRawMetadata());
+//	    System.out.println(objectMetadata.getETag());
 	    return objectMetadata;
 	}
 	
@@ -123,7 +127,7 @@ public class SinaStoreSDK {
 	 *  // "Process the objectData stream.
 	 *  objectData.close();
 	 */
-	public void getObject(String bucketName, String path, String savePath){
+	public void getObject(String bucketName, String path, String savePath) throws FileNotFoundException{
 	    //SDKGlobalConfiguration.setGlobalTimeOffset(-60*5);//自定义全局超时时间5分钟以后(可选项)
 	    S3Object s3Obj = conn.getObject(bucketName, path);
 	    InputStream in = s3Obj.getObjectContent();
@@ -141,8 +145,6 @@ public class SinaStoreSDK {
 	           out.write(buf, 0, count);
 	        }
 	        System.out.println("下载成功");
-	    } catch (FileNotFoundException e) {
-	        e.printStackTrace();
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    } catch (InterruptedException e) {
