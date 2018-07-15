@@ -8,7 +8,7 @@ import java.net.URL;
 public class HttpUtil {
 	private HttpURLConnection connection;
 	private URL url;
-	public String request(String path) {
+	public String request(String path,boolean isJson) {
 		String result = "";
 		try {
 			url = new URL(path);
@@ -18,7 +18,12 @@ public class HttpUtil {
 			StringBuilder info = new StringBuilder();
 			String str;
 			while( (str=br.readLine()) != null ) {
-				info.append(str+"<br>");
+				if(isJson){
+					info.append(str);
+				}else{
+					info.append(str+"<br>");
+				}
+				
 			}
 			result = info.toString();
 			br.close();

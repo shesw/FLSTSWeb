@@ -47,7 +47,7 @@ public class songInfo extends HttpServlet {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append(hu.request(sdkUtil.generateUrl(bucketName,txtPath,expires)));
+		sb.append(hu.request(sdkUtil.generateUrl(bucketName,txtPath,expires),true));
 		
 		sb.insert(sb.length()-1, ",\"mp3Path\":"+"\""+sdkUtil.generateUrl(bucketName, mp3Path, expires)+"\"");
 		sb.insert(sb.length()-1, ",\"jpgPath\":"+"\""+sdkUtil.generateUrl(bucketName, jpgPath, expires)+"\"");

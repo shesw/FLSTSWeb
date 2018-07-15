@@ -59,7 +59,7 @@ public class albumInfoServlet extends HttpServlet {
 		String picPath = sdkUtil.generateUrl(bucketName, "flsts_v2/songs/album_"+albumId+"/"+albumId+".jpg", expires);
 		//String introPath = sdkUtil.generateUrl(bucketName, "flsts_v2/songs/album_"+albumName+"/"+albumName+"_intro.txt", expires);
 		StringBuilder info = new StringBuilder();
-		info.append( httpUtil.request(infoPath) );
+		info.append( httpUtil.request(infoPath,true) );
 		info.insert(info.length()-1, ",\"logoSrc\":"+"\""+picPath+"\"");
 		String str = info.toString();
 //		JSONObject object = JSONObject.fromObject(str.substring(str.indexOf("{")));

@@ -26,7 +26,7 @@ pageEncoding="UTF-8"%>
 	    	<%     
 	    	   	String url = sss.generateUrl("music-store", path, 5);
 	    	   	HttpUtil hu = new HttpUtil();
-	    	   	String res = hu.request(url);
+	    	   	String res = hu.request(url,false);
 	    	   	out.println(res);
 	        %>
 	        <div>
