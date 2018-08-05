@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-=======
-/utils/
-/test/
->>>>>>> 51e1fcf7c4e91e9456126a6e33f006091537ddd6
+/fileUtils/
+/javabean/
 /servlet/
+/test/
+/utils/
