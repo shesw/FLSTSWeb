@@ -11,14 +11,18 @@ import com.sina.cloudstorage.services.scs.SCS;
 import com.sina.cloudstorage.services.scs.SCSClient;
 import com.sina.cloudstorage.services.scs.model.AccessControlList;
 import com.sina.cloudstorage.services.scs.model.Bucket;
+import com.sina.cloudstorage.services.scs.model.ListObjectsRequest;
 import com.sina.cloudstorage.services.scs.model.ObjectListing;
 import com.sina.cloudstorage.services.scs.model.ObjectMetadata;
 import com.sina.cloudstorage.services.scs.model.Permission;
 import com.sina.cloudstorage.services.scs.model.PutObjectRequest;
 import com.sina.cloudstorage.services.scs.model.PutObjectResult;
 import com.sina.cloudstorage.services.scs.model.S3Object;
+import com.sina.cloudstorage.services.scs.model.S3ObjectSummary;
 import com.sina.cloudstorage.services.scs.model.UserIdGrantee;
 import com.sina.cloudstorage.services.scs.transfer.ObjectMetadataProvider;
+
+import net.sf.json.JSON;
 
 public class SinaStoreSDK {
 	
@@ -92,12 +96,19 @@ public class SinaStoreSDK {
 	/**
 	 * 列bucket中所有文件
 	 */
-	public ObjectListing listObjects(String bucketName){
-	    ObjectListing objectListing = conn.listObjects(bucketName);
-	    System.out.println(objectListing);
-	    return objectListing;
-	}
+	public String[] listObjects(String prefix){
+		//"{'Bucket':'music-store','Delimiter':'/','Maker':'','MaxKeys':100,'Prefix':'favorPic'}"
+//		ListObjectsRequest listObjectsRequest  = new ListObjectsRequest("music-store", "favorPic", "", "/",100);
 	
+	    ObjectListing objectListing = conn.listObjects("music-store",prefix);
+	    List<S3ObjectSummary> objList = objectListing.getObjectSummaries();
+	    
+	    String[] list = new String[objList.size()];
+	    for(int i=0;i<objList.size();i++) {
+	    	list[i] = objList.get(i).getKey();
+	    }
+	    return list;
+	}
 	
 	/**
 	 * 获取object metadata

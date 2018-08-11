@@ -11,7 +11,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-beanutils.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-collections-3.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-lang-2.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ezmorph-1.0.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-lib-1.1-jdk13.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl.jar"/>
@@ -23,5 +22,9 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpclient-4.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpcore-4.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/scs-java-sdk-distribution-0.0.1-SNAPSHOT-bin.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-fileupload-1.3.2.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.2.4.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
